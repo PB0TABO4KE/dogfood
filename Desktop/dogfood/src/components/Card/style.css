@@ -17,8 +17,8 @@
     border: none;
     outline: none;
     height: 30px;
-    background-color: darkslateblue;
-    color: white;
+    background-color: #FFE44D;
+    color: black;
     border-radius: 4px;
     cursor: pointer;
 }

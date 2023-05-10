@@ -7,6 +7,9 @@
     grid-auto-rows: 40px;
     align-items: center;
     grid-column-end: span 2;
+    background-image: url("../../assets/images/banner_1_resize.jpg");
+    background-size: cover;
+    height: 180px;
 }
 
 .promo h3 {
@@ -30,6 +33,7 @@
 .promo.small {
     grid-column-end: span 1;
 }
+
 
 .pic2 {
     background-image: url("../../assets/images/promo2.webp");

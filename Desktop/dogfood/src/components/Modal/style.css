@@ -16,7 +16,8 @@
     max-width: calc(100% - 40 px);
     max-height: calc(100% - 40 px);
     width: 400px;
-    background-color: darkslateblue;
+    background-color: #FFE24D;
+    color: #000;
     padding: 20px;
     border-radius: 4px;
     box-sizing: border-box;
@@ -53,4 +54,10 @@ form {
 label {
  display:grid;
  gap: 5px;   
+}
+
+.close__btn {
+    position: relative;
+    top: 0px;
+    left: 260px;  
 }

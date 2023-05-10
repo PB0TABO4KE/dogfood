@@ -1,23 +1,26 @@
 import "./style.css";
 
-const Promo = (props) => {
-    const style = {
-        backgroundImage : props.pic,
+
+const PromoLukovnikov = (props) => {
+    const imgStyle = {
+        backgroundImage: `url(${props.pic})`
     };
     //  props - объект, в который можно передать разные свойства компонента //
     let name = "promo";
     switch (props.type) {
         case "lg": name = "promo big"; break;
         case "sm": name = "promo small"; break;
-        default: name = "promo";
+        default: name = "promo default";
     }
 
     return (
         <div className={name}>
-            <div className={props.pic ? "promo_pic" : "promo_pic pic2"}></div>
-            <h3>{props.text}</h3>
+            <div className={"promo_pic"} style={imgStyle}></div>
+            <h3 className={"banner_header"}>{props.header}</h3>
+            <p className={"banner_text"}>{props.text}</p>
         </div>
+        
     )
 }
 
-export default Promo;
+export default PromoLukovnikov;

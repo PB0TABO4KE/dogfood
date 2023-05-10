@@ -1,7 +1,8 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
+import { useNavigate } from "react-router";
 import "./style.css";
 
-const Modal = ({ active = true, setActive }) => {
+const Modal = ({ active, setActive, setUser }) => {
     const [auth, setAuth] = useState(true);
 
     const [name, setName] = useState("");
@@ -69,14 +70,20 @@ const Modal = ({ active = true, setActive }) => {
                 let dataLog = await resLog.json()
                 if (!dataLog.err) {
                     localStorage.setItem("rockUser", dataLog.data.name);
+                    localStorage.setItem("rockToken", dataLog.token);
+                    localStorage.setItem("rockId", dataLog.data._id);
                     clearForm();
                     setActive(false);
+                    setUser(dataLog.data.name);
                 }
             } else {
                 if (!data.err) {
                     localStorage.setItem("rockUser", data.data.name)
+                    localStorage.setItem("rockToken", data.token);
+                    localStorage.setItem("rockId", data.data._id);
                     clearForm();
                     setActive(false);
+                    setUser(data.data.name);
                 }
             }
 
@@ -86,7 +93,7 @@ const Modal = ({ active = true, setActive }) => {
 
     return <div className="modal-wrapper" style={{ display: active ? "flex" : "none" }}>
         <div className="modal">
-            <button onClick={() => setActive(false)}>Закрыть окно</button>
+            <button className="close__btn" onClick={() => setActive(false)}>Закрыть окно</button>
             <h3>Авторизация</h3>
             <form onSubmit={sendForm}>
                 {!auth && <label>

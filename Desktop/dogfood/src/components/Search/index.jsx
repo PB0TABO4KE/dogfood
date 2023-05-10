@@ -9,13 +9,14 @@ const Search = ({ arr, upd }) => {
 
     const [quantity, setQuantity] = useState(arr.length)
 
+    /*
     const [count, updateCount] = useState(0);
     //const [с чем сделать, что сделать(например функция)] = useState(0);//
     let n = 1;
     const click = () => {
         //console.log(n++);//
         updateCount(count + 1);
-    }
+    }*/
 
     const searchByText = (e) => {
         //e.target - обращение к тегу, на котором произошло событие//
@@ -30,10 +31,10 @@ const Search = ({ arr, upd }) => {
 
     return (
         <div className="search-block">
-            <input type="search" className="search" placeholder="Поиск по сайту" value={text} onChange={searchByText} />
+            <input type="search" className="search__common" placeholder="Поиск по сайту" value={text} onChange={searchByText} />
 
             {/*<input type="search" className="search" placeholder="Поиск по сайту" value={text} onChange={()=> setText(e.target.value)} /> так тоже можно*/}
-            <button onClick={click}>Тяфк</button>
+            <button /*onClick={click}*/>Тяфк</button>
             <hr />
             {/*<div>{text}, {n}, {count}</div>*/}
             <div>По вашему запросу «{text}» найден {quantity} подходящих товаров</div>

@@ -1,58 +1,122 @@
-import React, { useState } from "react";
-import Promo from "./components/Promo/Promo"; //Promo.jsx//
-import Card from "./components/Card"; //index.jsx//
-import { Header, Footer } from "./components/General";
-import cardsData from "./assets/data"; //data.json//
+import React, { useState, useEffect } from "react";
+import { Routes, Route, Link } from "react-router-dom";
+
+// Компоненты
+
+import { Header, Footer, MobileMenu } from "./components/General";
 import Search from "./components/Search";
 import Modal from "./components/Modal";
+import SearchHeader from "./components/SearchHeader";
+import cardsData from "./assets/data"; //data.json//
 
-const sizes = ["sm", "lg", "md"];
-const adds = [];
+import Promo from "./components/Promo/Promo";
+import PromoLukovnikov from "./components/PromoLukovnikov/PromoLukovnikov";
+import PromoFlex from "./components/PromoFlex/PromoFlex";
+import banner_pic_1 from "./assets/images/banner_pic_1.png";
 
-let text = "Полёты собак в космос — серия экспериментов, включавших проведение исследований по возможности полётов на и космических ракетах живых существ, наблюдение за поведением животных в условиях таких полётов, а также, изучение сложных явлений в пространстве."
-text = text.match(/[^\s,.]+/g);
+//Страницы
+import Draft from "./pages/Draft";
+import Main from "./pages/Main";
+import Catalog from "./pages/Catalog";
+import Profile from "./pages/Profile";
 
-const rand = (n) => Math.floor(Math.random() * n);
+import Card from "./components/Card";
 
-let n = 8;
-while (n--) {
-    adds.push({
-        text: `${text[rand(text.length)].slice(0, 8)} ${text[rand(text.length)]} ${text[rand(text.length)]}`,
-        pic: !!Math.round(Math.random()), // !!0 => false - !!1 => true
-        sizes: sizes[rand(sizes.length)]
-    })
-}
+
+
 
 const App = () => {
-    const [goods, setGoods] = useState(cardsData);
+    
+    const [token, setToken] = useState(localStorage.getItem("rockToken"));
     const [user, setUser] = useState(localStorage.getItem("rockUser"));
+    
     const [modalActive, setModalActive] = useState(false);
+// Товары из БД
+    const [serverGoods, setServerGoods] = useState([]);
+    //Товары для поиска и фильтрации
+    const [goods, setGoods] = useState(serverGoods);
 
+    useEffect(() => {
+        if (token) {
+            fetch("https://api.react-learning.ru/products", {
+                headers: {
+                    "Authorization": `Bearer ${token}`
+                }
+            })
+                .then(res => res.json())
+                .then(data => {
+                    console.log(data);
+                    setServerGoods(data.products);
+                })
+        }
+    }, [token])
+    //useEffect(() => {console.log("Модалка изменилась")}, [modalActive])//
+
+    
+
+
+    useEffect (() => {
+       // console.log("товары с сервера подгрузились");
+        setGoods(serverGoods);
+    }, [serverGoods])
+
+
+    useEffect(() => {
+        console.log("User was changed")
+        if (user) {
+            setToken(localStorage.getItem("rockToken"));
+        }
+        else {
+            setToken("");
+        }
+        console.log("U ", user);
+        console.log("t ", token);
+    }, [user])
     return (
 
         <React.Fragment>
-            <Header user={user} setUser={setUser} setModalActive={setModalActive}/>
-            <div className="container">
-                {/*<Card img={cardsData[0].pictures}
-                name={cardsData[0].name}
-                price={cardsData[0].price}
-                />*/}
-                {/*<Promo text="Asshole" pic={true} />
-                <Promo text="PB0TA_B_O4KE" type="sm" />*/}
+
+            <Header user={user} setModalActive={setModalActive} setGoods={setGoods} />
+            <MobileMenu user={user} setModalActive={setModalActive} />
+            <main>
 
 
-                <Search arr={cardsData} upd={setGoods} />
+                {/*SPA - Single Page Application */}
+                {/*
+                <nav>
+                    <Link to="/"> Главная</Link>
+                    <Link to="/catalog"> Каталог</Link>
+                    <Link to="/draft"> Старый код</Link>
+                </nav>*/}
+                <Routes>
+                    <Route path="/" element={<Main />} />
 
-                {goods.map((el, i) => <Card
-                    key={i}
-                    img={el.pictures}
-                    name={el.name}
-                    price={el.price}
-                />)}
-                {adds.map((el, i) => <Promo key={i} {...el} type={el.sizes} />)}
-            </div>
+                    <Route path="/catalog" element={<Catalog />} />
+
+                    <Route path="/draft" element={<Draft />} />
+
+                    <Route path="/profile" element={<Profile user={user} setUser={setUser} color="yellow" />} />
+
+                </Routes>
+                <PromoLukovnikov header="Это заголовок" text="Это очень длинный текст, чтобы проверить, как именно он будет отображаться на баннере и придумать, как его правильно сверстать" pic={banner_pic_1} />
+                <PromoLukovnikov header="Это заголовок" text="Это очень длинный текст, чтобы проверить, как именно он будет отображаться на баннере и придумать, как его правильно сверстать Это очень длинный текст, чтобы проверить, как именно он будет отображаться на баннере и придумать, как его правильно сверстать Это очень длинный текст, чтобы проверить, как именно он будет отображаться на баннере и придумать, как его правильно сверстать" pic={banner_pic_1} />
+                <PromoFlex header="Это заголовок" text="Это очень длинный текст, чтобы проверить, как именно он будет отображаться на баннере и придумать, как его правильно сверстать" pic={banner_pic_1} />
+                <PromoFlex header="Это заголовок" text="Это очень длинный текст, чтобы проверить, как именно он будет отображаться на баннере и придумать, как его правильно сверстать Это очень длинный текст, чтобы проверить, как именно он будет отображаться на баннере и придумать, как его правильно сверстать Это очень длинный текст, чтобы проверить, как именно он будет отображаться на баннере и придумать, как его правильно сверстать" pic={banner_pic_1} />
+                <PromoFlex type="lg" header="Это заголовок" text="Это очень длинный текст, чтобы проверить, как именно он будет отображаться на баннере и придумать, как его правильно сверстать" pic={banner_pic_1} />
+                <PromoFlex type="lg" header="Это заголовок" text="Это очень длинный текст, чтобы проверить, как именно он будет отображаться на баннере и придумать, как его правильно сверстать Это очень длинный текст, чтобы проверить, как именно он будет отображаться на баннере и придумать, как его правильно сверстать Это очень длинный текст, чтобы проверить, как именно он будет отображаться на баннере и придумать, как его правильно сверстать" pic={banner_pic_1} />
+                <PromoLukovnikov type="lg" header="Это заголовок" text="Это очень длинный текст, чтобы проверить, как именно он будет отображаться на баннере и придумать, как его правильно сверстать" pic={banner_pic_1} />
+                <PromoLukovnikov type="lg" header="Это заголовок" text="Это очень длинный текст, чтобы проверить, как именно он будет отображаться на баннере и придумать, как его правильно сверстать Это очень длинный текст, чтобы проверить, как именно он будет отображаться на баннере и придумать, как его правильно сверстать Это очень длинный текст, чтобы проверить, как именно он будет отображаться на баннере и придумать, как его правильно сверстать" pic={banner_pic_1} />
+                <PromoFlex type="sm" header="Это заголовок" text="Это очень длинный текст, чтобы проверить, как именно он будет отображаться на баннере и придумать, как его правильно сверстать" pic={banner_pic_1} />
+                <PromoFlex type="sm" header="Это заголовок" text="Это очень длинный текст, чтобы проверить, как именно он будет отображаться на баннере и придумать, как его правильно сверстать Это очень длинный текст, чтобы проверить, как именно он будет отображаться на баннере и придумать, как его правильно сверстать Это очень длинный текст, чтобы проверить, как именно он будет отображаться на баннере и придумать, как его правильно сверстать" pic={banner_pic_1} />
+                <PromoLukovnikov type="sm" header="Это заголовок" text="Это очень длинный текст, чтобы проверить, как именно он будет отображаться на баннере и придумать, как его правильно сверстать" pic={banner_pic_1} />
+                <PromoLukovnikov type="sm" header="Это заголовок" text="Это очень длинный текст, чтобы проверить, как именно он будет отображаться на баннере и придумать, как его правильно сверстать Это очень длинный текст, чтобы проверить, как именно он будет отображаться на баннере и придумать, как его правильно сверстать Это очень длинный текст, чтобы проверить, как именно он будет отображаться на баннере и придумать, как его правильно сверстать" pic={banner_pic_1} />
+
+
+
+            </main>
+
             <Footer />
-            <Modal active={modalActive} setActive={setModalActive}/>
+            <Modal active={modalActive} setActive={setModalActive} setUser={setUser} />
         </React.Fragment>
     )
 }

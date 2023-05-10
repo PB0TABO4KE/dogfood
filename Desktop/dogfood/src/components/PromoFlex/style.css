@@ -1,0 +1,58 @@
+.promo_flex {
+    padding: 20px;
+    border: 1px solid;
+    border-radius: 4px;  
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between; 
+    background-image: url("../../assets/images/banner_1_resize.jpg");  
+    background-size: cover;
+}
+
+.promo_promo_flex {
+    width: 35%;
+    display: flex;
+    flex-direction: column;
+    background-size: 0%;
+}
+
+.promo_pic_flex {
+    display: flex;
+    width: 65%;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: top center;
+}
+
+.banner_header_flex {
+    display: flex;
+}
+
+.banner_text_flex {
+    display: flex;
+    justify-content: flex-start;
+
+}
+
+.promo_flex.big {
+    grid-column: 1 / span 4; /* span 4 - объединить, охватить - увеличить количество занимаемых столбцов до 4*/
+}
+
+.promo_flex.small {
+    grid-column-end: span 1;
+}
+
+.promo_flex.default {
+    grid-column: span 2;
+}
+
+/*Мобильная версия*/
+
+@media (max-width: 980px) {
+}
+
+/*Десктоп версия*/
+
+@media (min-width: 981px) {
+
+}
