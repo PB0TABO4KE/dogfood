@@ -15,7 +15,7 @@ const Catalog = ({ goods, setServerGoods }) => {
     const sortHandler = (vector) => {
         if (vector === sort) {
             setSort(null)
-            setServerGoods(old => [...old])
+            setServerGoods(old => old.sort((a,b) => new Date (a.created_at).getTime() - new Date (b.created_at).getTime()))
         }
         else {
             setSort(vector);
@@ -33,10 +33,7 @@ const Catalog = ({ goods, setServerGoods }) => {
             {/*Фильтрация*/}
             <button>Новинки</button>
             <button>Скидки</button>
-            <button>Хуитки</button>
-            <button>Пиздитки</button>
-            <button>Ебитки</button>
-
+         
         </div>
         {goods?.map(g => <Card key={g._id} {...g} img={g.pictures} setServerGoods={setServerGoods} />)}
     </div>

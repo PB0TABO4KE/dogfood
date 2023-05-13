@@ -54,7 +54,7 @@ const App = () => {
                 .then(data => {
                     console.log(data);
                     console.log(data.products);
-                    setServerGoods(data.products);
+                    setServerGoods(data.products.sort((a,b) => new Date (b.created_at).getTime() - new Date (a.created_at).getTime()));
                 })
         }
     }, [token])
