@@ -12,7 +12,8 @@ import { useNavigate } from "react-router";
 
 
 
-const Header = ({ user, setModalActive, setGoods }) => {
+
+const Header = ({ user, setModalActive, setGoods, serverGoods}) => {
     //const [goods, setGoods] = useState(cardsData);
     const navigate = useNavigate();
     const logIn = (e) => {
@@ -24,7 +25,7 @@ const Header = ({ user, setModalActive, setGoods }) => {
     }
     return <header>
         <Logo />
-        <div className="search"><SearchHeader arr={cardsData} upd={setGoods} /></div>
+        <div className="search"><SearchHeader arr={serverGoods} upd={setGoods} /></div>
 
         <nav className="header__menu">
             {user && <>

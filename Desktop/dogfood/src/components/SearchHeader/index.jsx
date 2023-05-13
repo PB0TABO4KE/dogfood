@@ -1,7 +1,6 @@
 import "./style.css";
-import { useState } from "react";
-import cardsData from "../../assets/data"; //data.json//
-import Draft from "../../pages/Draft";
+import { useState, useEffect } from "react";
+
 
 const SearchHeader = ({ arr, upd }) => {
     const [text, setText] = useState("");

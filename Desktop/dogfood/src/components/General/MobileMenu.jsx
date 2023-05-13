@@ -33,7 +33,7 @@ const MobileMenu = ({ user, setModalActive }) => {
 
 
             </>}
-            {!user && <Link to="" title="Войти" className="mobile__menu__item" onClick={logIn}><img src={login_ico} className="mobile__menu__item" alt="Войти" />Войти</Link>}
+            {!user && <Link to="" title="Войти" className="mobile__menu__item mobile__menu__login" onClick={logIn}><img src={login_ico} className="mobile__menu__item" alt="Войти" />Войти</Link>}
             
         </nav>
     )
