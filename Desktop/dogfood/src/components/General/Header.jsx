@@ -30,7 +30,7 @@ const Header = ({ user, setModalActive, setGoods, serverGoods}) => {
 
     return <header>
         <Logo />
-        <div className="search"><SearchHeader arr={serverGoods} upd={setGoods} /></div>
+        <div className="search"><SearchHeader arr={serverGoods} upd={setGoods} user={user} /></div>
 
         <nav className="header__menu">
             {user && <>

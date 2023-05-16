@@ -2,7 +2,7 @@ import "./style.css";
 import { useState, useEffect } from "react";
 
 
-const SearchHeader = ({ arr, upd }) => {
+const SearchHeader = ({ arr, upd, user }) => {
     const [text, setText] = useState("");
    
     const searchByText = (e) => {
@@ -15,11 +15,14 @@ const SearchHeader = ({ arr, upd }) => {
         console.log(result);
     }
 
-    return (
+    return ( <>
+        {user && <>
         <div className="search-header">
-            <input type="search" className="search" placeholder="Поиск" value={text} onChange={searchByText} />
+            <input type="search" placeholder="Поиск" value={text} onChange={searchByText} />
         </div>
-    )
+        </>}
+
+        </>)
 }
 
 export default SearchHeader;

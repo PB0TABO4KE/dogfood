@@ -6,7 +6,6 @@ const navigate = useNavigate();
 
     const capitonStyle = {
     fontWeight: "bold",
-    color: color,
     //backgroundImage: `url{$ props}`//
 }
 const logOut = (e) => {
@@ -21,12 +20,14 @@ const logOut = (e) => {
 
 return (<>
 <h1>Личный кабинет</h1>
-<div>
-    Добро пожаловать,&nbsp;
+<div className="profile__greetings">
+    Добро пожаловать,<br/>
     <span style={capitonStyle}>{user}</span>
     !
 </div>
-{<a href="" title="Выйти" className="header__ico" onClick={logOut}><img src={logout_ico} className="header__ico" alt="Выйти" />Выйти</a>}
+<div className="profile__log">
+{<a href="" title="Выйти" className="profile__logout" onClick={logOut}><img src={logout_ico} className="profile__logout" alt="Выйти" />Выйти</a>}
+</div>
 </>)
 }
 

@@ -48,7 +48,7 @@ const Card = ({ img, name, price, _id, discount, tags, likes, setServerGoods }) 
         {discount > 0 && <span className="card__discount">{discount} <Percent/>  </span>}
         <span className="card__like" onClick={updLike}>
             {isLike ?
-                <Heart/> : <HeartFill/>}
+                <HeartFill/> : <Heart/>}
                 </span>
         <img src={img} alt="Картинка" className="card__img" />
         <span className="card__name">{name}</span>

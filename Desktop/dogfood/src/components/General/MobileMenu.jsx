@@ -24,8 +24,8 @@ const MobileMenu = ({ user, setModalActive }) => {
 
         <nav className="mobile__menu">
             {user && <>
-                <Link to="/" title="Главная"><div className="mobile__menu__item"><HouseFill /></div><div className="mobile__menu__item"><h4>Главная</h4></div></Link>
-                <Link to="/catalog" title="Каталог"><div className="mobile__menu__item"><CardList /></div><div className="mobile__menu__item"><h4>Каталог</h4></div></Link>
+                <Link to="/" title="Главная"><div className="mobile__menu__item"><HouseFill /></div><div className="mobile__menu__item"><span>Главная</span></div></Link>
+                <Link to="/catalog" title="Каталог"><div className="mobile__menu__item"><CardList /></div><div className="mobile__menu__item"><span>Каталог</span></div></Link>
                 <Link to="/" title="Корзина"><div className="mobile__menu__item"><Bag /></div><div className="mobile__menu__item"><h4>Корзина</h4></div></Link>
                 <Link to="/" title="Избранное"><div className="mobile__menu__item"><Heart /></div><div className="mobile__menu__item"><h4>Избранное</h4></div></Link>
                 <Link to="/profile" title="Профиль"><div className="mobile__menu__item"><PersonCircle /></div><div className="mobile__menu__item"><h4>Профиль</h4></div></Link>
