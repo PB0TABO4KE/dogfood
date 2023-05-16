@@ -1,9 +1,7 @@
-import { Quote } from "react-bootstrap-icons";
-import { useState, useEffect } from "react";
 import "./style.css";
 
 
-const News = ({ user, author, content, description, publishedAt, title, url, urlToImage }) => {
+const News = ({ description, title, url, urlToImage }) => {
 
     return <>
     
