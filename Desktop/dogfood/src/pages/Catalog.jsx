@@ -1,10 +1,11 @@
 import Card from "../components/Card";
-import { useState, useEffect } from "react";
+import { useState, useContext } from "react";
+import Ctx from "../context"
 
 
 
-const Catalog = ({ goods, setServerGoods }) => {
-
+const Catalog = ({ setServerGoods }) => {
+const {goods} = useContext(Ctx)
     const [sort, setSort] = useState(null);
 
     const filterSt = {
@@ -25,6 +26,7 @@ const Catalog = ({ goods, setServerGoods }) => {
         }
     }
     return (<div className="container">
+       
         <div style={filterSt}>
 
             {/*Сортировка*/}

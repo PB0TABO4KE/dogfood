@@ -12,14 +12,16 @@ import { useNavigate } from "react-router";
 import login_ico from "../assets/icons/login_ico.svg"
 import setModalActive from "../components/Modal"
 import News from "../components/News";
+import Ctx from "../context"
+import { useContext } from "react";
 
-const Main = ({ goods, setServerGoods, setModalActive, user, news, setServerNews}) => {
+const Main = ({ goods, setServerGoods, setModalActive, user}) => {
+    const {news} = useContext(Ctx);
+    const {setServerNews} = useContext(Ctx);
     const navigate = useNavigate();
     const logIn = (e) => {
         e.preventDefault();
-        //setUser("lk-band")
-        //localStorage.setItem("rockUser", "lk-band");
-        setModalActive(true);
+              setModalActive(true);
         navigate("/profile")
     }
 

@@ -13,8 +13,6 @@ const MobileMenu = ({ user, setModalActive }) => {
     const navigate = useNavigate();
     const logIn = (e) => {
         e.preventDefault();
-        //setUser("lk-band")
-        //localStorage.setItem("rockUser", "lk-band");
         setModalActive(true);
         navigate("/profile")
     }

@@ -14,15 +14,15 @@ import { useState, useEffect } from "react";
 
 
 const Header = ({ user, setModalActive, setGoods, serverGoods}) => {
-    //const [goods, setGoods] = useState(cardsData);
+    
     const navigate = useNavigate();
     const [likeCnt, setLikeCnt] = useState(0);
     const [cartCnt, setCartCnt] = useState(0);
     useEffect(() => {setLikeCnt(serverGoods.filter(el => el.likes.includes(localStorage.getItem("rockId"))).length)}, [serverGoods]);
     const logIn = (e) => {
         e.preventDefault();
-        //setUser("lk-band")
-        //localStorage.setItem("rockUser", "lk-band");
+        
+      
         setModalActive(true);
         navigate("/profile")
     }
@@ -30,7 +30,7 @@ const Header = ({ user, setModalActive, setGoods, serverGoods}) => {
 
     return <header>
         <Logo />
-        <div className="search"><SearchHeader arr={serverGoods} upd={setGoods} user={user} /></div>
+        <div className="search"><SearchHeader arr={serverGoods}  user={user} /></div>
 
         <nav className="header__menu">
             {user && <>

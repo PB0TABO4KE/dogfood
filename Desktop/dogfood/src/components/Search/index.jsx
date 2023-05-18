@@ -1,31 +1,24 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
+import Ctx from "../../context"
 
 import "./style.css";
 
 //arr - это список товаров из json-файла//
-const Search = ({ arr, upd }) => {
-    //arr - общий массив, upd - изменяемый //
-    //let text = "corn";//
+const Search = ({ arr }) => {
+    const {setGoods} = useContext(Ctx);
     const [text, setText] = useState("");
     const [quantity, setQuantity] = useState(arr.length)
 
-    /*
-    const [count, updateCount] = useState(0);
-    //const [с чем сделать, что сделать(например функция)] = useState(0);//
-    let n = 1;
-    const click = () => {
-        //console.log(n++);//
-        updateCount(count + 1);
-    }*/
+
 
 useEffect(() => {
     if (text) {
         let result = arr.filter(el => new RegExp(text, "i").test(el.name));
-        upd(result);
+        setGoods(result);
         setQuantity(result.length);
     }
     else {
-        upd(arr);
+        setGoods(arr);
         setQuantity(arr.length);
     }
 },
@@ -37,7 +30,7 @@ useEffect(() => {
         setText(val);
         //let result = arr.filter(el => el.name.toLowerCase().includes(val.toLowerCase()))//
         let result = arr.filter(el => new RegExp(val, "i").test(el.name));
-        upd(result);
+        setGoods(result);
         setQuantity(result.length);
         console.log(result);
     }

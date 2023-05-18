@@ -1,11 +1,8 @@
 import { useState } from "react";
-import Search from "../components/Search"
 import Card from "../components/Card"
 import Promo from "../components/Promo/Promo"
 import cardsData from "../assets/data"; //data.json//
-import SearchHeader from "../components/SearchHeader";
-import PromoLukovnikov from "../components/PromoLukovnikov/PromoLukovnikov"
-import PromoFlex from "../components/PromoFlex/PromoFlex"
+
 
 
 const sizes = ["sm", "lg", "md"];
@@ -44,7 +41,7 @@ const Draft = () => {
                 <Promo text="PB0TA_B_O4KE" type="sm" />*/}
             <Promo text="PB0TA_B_O4KE" type="lg" pic="../../assets/images/banner_pic_1.png" />
 
-            {/*<Search arr={cardsData} upd={setGoods} />*/}
+            
 
             {goods.map((el, i) => <Card
                 key={i}

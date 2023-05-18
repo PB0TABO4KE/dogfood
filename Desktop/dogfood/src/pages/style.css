@@ -1,0 +1,157 @@
+.product__add__cart {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+
+    
+}
+
+.product__delivery__garanty_pic{
+    justify-content: stretch;
+ 
+}
+
+.product__delivery__garanty_text{
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+}
+
+.product__delivery__garanty {
+    width:100%px;
+    height: 20%;
+    border: none;
+    color: black;
+    padding: 20px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    border-radius: 30px;
+    background-color: wheat;
+    display: grid;
+    grid-template-columns: 20% 80%;
+ 
+}
+
+
+
+ .product__discount {
+        position: relative;
+        
+        
+        background-color: pink;
+        padding: 5px;
+        border-radius: 5px;
+        width: 50px;
+        color: black;
+    }
+
+
+
+.product__add__favorites{
+    padding-top: 20px;
+    padding-bottom: 20px;
+    color: rgb(39, 39, 39);
+}
+
+.product__cart__btn {
+    border: none;
+    outline: none;
+    background-color: #FFE44D;
+    color: black;
+    border-radius: 4px;
+    cursor: pointer;
+    width: 60%;
+    border-radius: 30px;
+}
+
+.product__cart__btn:hover {
+    background-color: #777;
+}
+
+
+.product__name {
+    display: flex;
+    color: black;
+padding: 8px;
+}
+
+.product__title {
+display: flex;
+flex-direction: column;
+width: 40%;
+
+}
+
+.section {
+    display: grid;
+    grid-column: 1 / span 4 ;
+
+}
+
+.product__main {
+    display: flex;
+    justify-content: space-between;
+ }
+
+span {
+    color: black;
+}
+.product__artikul {
+    color: black;
+}
+
+.product__title__bottom {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 8px;
+
+}
+
+
+.product__cart__cnt{
+display: flex;
+max-width: 10%;
+border-width: 0px;
+border-radius: 30px;
+height: 45px;
+width: 90px;
+font-size: 25px;
+padding-left: 10%;
+padding-right: 10%;
+}
+
+.product__cart__cnt input::placeholder {
+    font-size: 40px;
+    font-weight: normal;
+    
+
+} 
+
+.product__cart__cnt input{
+    border-width: 0px;
+    padding-left: 20px;
+    
+    border: none;
+    outline: none;
+    height: 40px;
+ width: 100%;
+}
+
+
+.product__picture {
+    width: 50%;
+    position: relative;
+}
+
+.product__shop_and_deliver {
+    width: 40%;
+}
+
+.product__old__price {
+    color: grey;
+}
+
+.product__new__price {
+    color: crimson;
+}

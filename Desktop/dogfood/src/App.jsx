@@ -5,6 +5,7 @@ import { Routes, Route, Link } from "react-router-dom";
 // Компоненты
 import { Header, Footer, MobileMenu } from "./components/General";
 import Modal from "./components/Modal";
+import Ctx from "./context";
 
 //Страницы
 import Draft from "./pages/Draft";
@@ -13,10 +14,10 @@ import Catalog from "./pages/Catalog";
 import Profile from "./pages/Profile";
 import Product from "./pages/Product";
 import Favorites from "./pages/Favorites"
-import Loader from "./components/Loader";
-import News from "./components/News";
+
 
 const App = () => {
+
 
     const [token, setToken] = useState(localStorage.getItem("rockToken"));
     const [user, setUser] = useState(localStorage.getItem("rockUser"));
@@ -44,12 +45,11 @@ const App = () => {
 
     useEffect(() => {
         if (token) {
-            fetch("https://newsapi.org/v2/everything?language=ru&q=dogs&apiKey=25c54a1ab073487a9d99403ec40b5274")
+            fetch("https://newsapi.org/v2/everything?language=ru&q=dogs&q=собака&q=cats&apiKey=25c54a1ab073487a9d99403ec40b5274")
                 .then(res => res.json())
                 .then(data => {
                     setServerNews(data.articles);
-                    console.log(data.articles)
-                })
+                    })
         }
     }, [token]);
 
@@ -79,8 +79,15 @@ const App = () => {
     }, [user])
 
     return (
+        <Ctx.Provider value={{
+            goods: goods,
+            setGoods,
+            serverGoods,
+            news,
+            setServerNews
+           }}>
         <React.Fragment>
-            <Header user={user} setModalActive={setModalActive} setGoods={setGoods} serverGoods={serverGoods} />
+            <Header user={user} setModalActive={setModalActive}  serverGoods={serverGoods} />
             <MobileMenu user={user} setModalActive={setModalActive} />
             <main>
                 <Routes>
@@ -93,7 +100,7 @@ const App = () => {
                     {user && <>
                         <Route path="/" element={<Main goods={goods} setModalActive={setModalActive} setServerGoods={setServerGoods} user={user} news={news} setServerNews={setServerNews} />} />
 
-                        <Route path="/catalog" element={<Catalog goods={goods} setServerGoods={setServerGoods} serverGoods={serverGoods} />} />
+                        <Route path="/catalog" element={<Catalog setServerGoods={setServerGoods} />} />
 
                         <Route path="/draft" element={<Draft />} />
 
@@ -113,7 +120,7 @@ const App = () => {
             <Footer />
             <Modal active={modalActive} setActive={setModalActive} setUser={setUser} />
         </React.Fragment>
-    )
+        </Ctx.Provider>)
 }
 
 export default App;
