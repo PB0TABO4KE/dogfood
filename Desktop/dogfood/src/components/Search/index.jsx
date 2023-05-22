@@ -3,33 +3,33 @@ import Ctx from "../../context"
 
 import "./style.css";
 
-//arr - это список товаров из json-файла//
-const Search = ({ arr }) => {
+const Search = () => {
     const {setGoods} = useContext(Ctx);
+    const { goods } = useContext(Ctx);
     const [text, setText] = useState("");
-    const [quantity, setQuantity] = useState(arr.length)
+    const [quantity, setQuantity] = useState(goods.length)
 
 
 
 useEffect(() => {
     if (text) {
-        let result = arr.filter(el => new RegExp(text, "i").test(el.name));
+        let result = goods.filter(el => new RegExp(text, "i").test(el.name));
         setGoods(result);
         setQuantity(result.length);
     }
     else {
-        setGoods(arr);
-        setQuantity(arr.length);
+        setGoods(goods);
+        setQuantity(goods.length);
     }
 },
-[arr])
+[goods])
 
     const searchByText = (e) => {
-        //e.target - обращение к тегу, на котором произошло событие//
+
         let val = e.target.value;
         setText(val);
-        //let result = arr.filter(el => el.name.toLowerCase().includes(val.toLowerCase()))//
-        let result = arr.filter(el => new RegExp(val, "i").test(el.name));
+  
+        let result = goods.filter(el => new RegExp(val, "i").test(el.name));
         setGoods(result);
         setQuantity(result.length);
         console.log(result);

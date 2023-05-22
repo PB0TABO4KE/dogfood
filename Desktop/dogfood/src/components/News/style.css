@@ -1,4 +1,4 @@
- @keyframes slide {
+ /* @keyframes slide {
     from {transform: translate(0,0);
     }
     to {
@@ -25,7 +25,7 @@
     top: 0;
     right: 0;
     transform: translate(calc(100% + 20px), 0);
- }
+ }*/
 
 
  /*Микрмобильная версия*/

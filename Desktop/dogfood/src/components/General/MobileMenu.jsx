@@ -3,13 +3,19 @@ import { HouseFill, CardList, Heart, Bag, PersonCircle } from "react-bootstrap-i
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router";
 import login_ico from "../../assets/icons/login_ico.svg";
+import { useContext } from "react";
+import Ctx from "../../context"
 
 
 
 
 
 
-const MobileMenu = ({ user, setModalActive }) => {
+const MobileMenu = () => {
+
+    const {user} = useContext(Ctx); 
+    const {setModalActive} = useContext(Ctx);
+    
     const navigate = useNavigate();
     const logIn = (e) => {
         e.preventDefault();

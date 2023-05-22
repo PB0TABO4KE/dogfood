@@ -1,20 +1,34 @@
+.promo_promo_flex {
 
-.profile__greetings{
-    grid-column: 1 / span 2; 
+    color: wheat;
+}
+
+.banner_header_flex {
+
+    color: wheat;
+}
+
+.banner_text_flex {
+
+    color: wheat;
+}
+
+.profile__greetings {
+    grid-column: 1 / span 2;
     color: black;
     grid-row: 2;
 }
 
-.profile__log{
-    grid-column: 1 / span 2; 
+.profile__log {
+    grid-column: 1 / span 2;
     color: black;
     grid-row: 3;
     height: 25px;
     display: flex;
     flex-direction: column;
-    align-items:flex-start;
+    align-items: flex-start;
     justify-content: center;
-    
+
 }
 
 
@@ -23,7 +37,7 @@
 @media (max-width: 980px) {
     body {
         background-color: #f0f0f0;
-        color: wheat;
+        color: black;
         margin: 0;
         font-family: nunito, sans-serif;
     }
@@ -34,10 +48,11 @@
         align-content: flex-start;
         column-gap: 2%;
         row-gap: 15px;
+        grid-template-columns: repeat(2, 1fr);
         grid-column: 1 / span 2;
-        grid-template-columns: repeat(2, 49%);
-         
-     }
+      
+
+    }
 
     h1,
     h2,
@@ -45,8 +60,8 @@
         margin: 0;
         grid-column: 1 / span 2;
     }
-    
-    h1{
+
+    h1 {
         color: black
     }
 
@@ -71,6 +86,23 @@
         text-decoration: none;
     }
 
+    .container {
+        display: grid;
+        grid-template-columns: repeat(2, 49%);
+        column-gap: 2%;
+        row-gap: 20px;
+        grid-column: 1 / span 2;
+    }
+
+    .pagination__catalog {
+        grid-column-end: span 2
+    }
+
+    .filter__catalog {
+        grid-column-end: span 2;
+        gap: 20 px;
+        display: flex;
+    }
 
 }
 
@@ -79,7 +111,7 @@
 @media (min-width: 981px) {
     body {
         background-color: #f0f0f0;
-        color: wheat;
+        color: black;
         margin: 0;
         font-family: nunito, sans-serif;
     }
@@ -88,10 +120,10 @@
         padding: 30px 170px;
         display: grid;
         align-content: flex-start;
-        gap: 20px;
         grid-column: 1 / span 4;
         grid-template-columns: repeat(4, 25%);
         font-family: nunito, sans-serif;
+  
     }
 
     h1,
@@ -100,11 +132,11 @@
         margin: 0;
         grid-column: 1 / span 4;
         font-family: nunito, sans-serif;
-        
+
     }
 
     h1,
-    h2{
+    h2 {
         color: black
     }
 
@@ -126,11 +158,20 @@
         text-decoration: none;
     }
 
-}
+    .container {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 20px;
+        grid-column: 1 / span 4;
+    }
 
-.container {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 20px;
-    grid-column: 1 / span 4;
+    .pagination__catalog {
+        grid-column-end: span 4
+    }
+
+    .filter__catalog {
+        grid-column-end: span 4;
+        gap: 20 px;
+        display: flex;
+    }
 }

@@ -1,19 +1,24 @@
 import Logo from "./Logo";
 import SearchHeader from "../SearchHeader";
 import login_ico from "../../assets/icons/login_ico.svg";
-import cardsData from "../../assets/data"; //data.json//
 import { CardList, Heart, Bag, PersonCircle } from "react-bootstrap-icons";
 // иконки можно найти тут https://icons.getbootstrap.com/ //
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router";
 import { useState, useEffect } from "react";
+import { useContext } from "react";
+import Ctx from "../../context"
 
 
 
 
 
 
-const Header = ({ user, setModalActive, setGoods, serverGoods}) => {
+
+const Header = () => {
+    const {user} = useContext(Ctx); 
+    const {setModalActive} = useContext(Ctx);
+    const {serverGoods} = useContext(Ctx);
     
     const navigate = useNavigate();
     const [likeCnt, setLikeCnt] = useState(0);
@@ -30,7 +35,7 @@ const Header = ({ user, setModalActive, setGoods, serverGoods}) => {
 
     return <header>
         <Logo />
-        <div className="search"><SearchHeader arr={serverGoods}  user={user} /></div>
+        <div className="search"><SearchHeader /></div>
 
         <nav className="header__menu">
             {user && <>

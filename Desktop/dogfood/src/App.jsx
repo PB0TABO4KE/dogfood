@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Routes, Route, Link } from "react-router-dom";
+import { Routes, Route } from "react-router-dom";
 
 
 // Компоненты
@@ -27,6 +27,7 @@ const App = () => {
     const [goods, setGoods] = useState([]);
     const [serverNews, setServerNews] = useState([]);
     const [news, setNews] = useState([]);
+    const [text, setText] = useState("");
 
     useEffect(() => {
         if (token) {
@@ -66,6 +67,15 @@ const App = () => {
     }, [serverNews]);
 
 
+    const [newsBlock, setNewsBlock] = useState([]);
+    useEffect(() => {
+        fetch("https://newsapi.org/v2/everything?q=животные&sources=lenta&apiKey=6c7fc5e6a754429ab47063a1b1a54774")
+            .then(res => res.json())
+            .then(data => {
+                console.log(data);
+                setNewsBlock(data.articles)
+            })
+    }, [])
 
     useEffect(() => {
         if (user) {
@@ -80,35 +90,46 @@ const App = () => {
 
     return (
         <Ctx.Provider value={{
-            goods: goods,
+            goods,
             setGoods,
             serverGoods,
+            setServerGoods,
             news,
-            setServerNews
+            setServerNews,
+            token,
+            modalActive,
+            setModalActive,
+            user,
+            setUser,
+            userId,
+            newsBlock,
+            text,
+            setText
+            
            }}>
         <React.Fragment>
-            <Header user={user} setModalActive={setModalActive}  serverGoods={serverGoods} />
-            <MobileMenu user={user} setModalActive={setModalActive} />
+            <Header />
+            <MobileMenu />
             <main>
                 <Routes>
 
                     {!user && <>
-                        <Route path="/*" element={<Main goods={goods} setModalActive={setModalActive} setServerGoods={setServerGoods} user={user} news={news} setServerNews={setServerNews} />} />
+                        <Route path="/*" element={<Main />} />
 
                     </>}
 
                     {user && <>
-                        <Route path="/" element={<Main goods={goods} setModalActive={setModalActive} setServerGoods={setServerGoods} user={user} news={news} setServerNews={setServerNews} />} />
+                        <Route path="/" element={<Main />} />
 
-                        <Route path="/catalog" element={<Catalog setServerGoods={setServerGoods} />} />
+                        <Route path="/catalog" element={<Catalog />} />
 
                         <Route path="/draft" element={<Draft />} />
 
-                        <Route path="/profile" element={<Profile user={user} setUser={setUser} color="yellow" />} />
+                        <Route path="/profile" element={<Profile />} />
 
-                        <Route path="/product/:id" element={<Product token={token} />} />
+                        <Route path="/product/:id" element={<Product />} />
 
-                        <Route path="/favorites" element={<Favorites goods={goods} userId={userId} setServerGoods={setServerGoods} />} />
+                        <Route path="/favorites" element={<Favorites />} />
                     </>}
 
                 </Routes>
@@ -118,7 +139,7 @@ const App = () => {
             </main>
 
             <Footer />
-            <Modal active={modalActive} setActive={setModalActive} setUser={setUser} />
+            <Modal />
         </React.Fragment>
         </Ctx.Provider>)
 }

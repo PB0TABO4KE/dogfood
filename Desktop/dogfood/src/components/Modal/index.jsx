@@ -1,8 +1,16 @@
 import { useState } from "react";
-import { useNavigate } from "react-router";
 import "./style.css";
+import { useContext} from "react";
+import Ctx from "../../context"
 
-const Modal = ({ active, setActive, setUser }) => {
+
+
+const Modal = () => {
+
+    const { setModalActive } = useContext(Ctx);
+    const { modalActive } = useContext(Ctx); 
+    const { setUser } = useContext(Ctx); 
+
     const [auth, setAuth] = useState(true);
 
     const [name, setName] = useState("");
@@ -51,12 +59,7 @@ const Modal = ({ active, setActive, setUser }) => {
         })
         let data = await res.json()
         if (!data.err) {
-            // При регистрации с сервера приходит объект о пользователе {name, email, _id, group}
-            /* при входе с сервера приходит два параметра: 
-             1) токен (без него мы не сможем работать с сервером дальше)
-             2) тоже что и при регистрации
-             {data: {...}, token: ""}
-            */
+ 
             if (!auth) {
                 delete body.name;
                 delete body.group
@@ -73,7 +76,7 @@ const Modal = ({ active, setActive, setUser }) => {
                     localStorage.setItem("rockToken", dataLog.token);
                     localStorage.setItem("rockId", dataLog.data._id);
                     clearForm();
-                    setActive(false);
+                    setModalActive(false);
                     setUser(dataLog.data.name);
                 }
             } else {
@@ -82,7 +85,7 @@ const Modal = ({ active, setActive, setUser }) => {
                     localStorage.setItem("rockToken", data.token);
                     localStorage.setItem("rockId", data.data._id);
                     clearForm();
-                    setActive(false);
+                    setModalActive(false);
                     setUser(data.data.name);
                 }
             }
@@ -91,9 +94,9 @@ const Modal = ({ active, setActive, setUser }) => {
 
     }
 
-    return <div className="modal-wrapper" style={{ display: active ? "flex" : "none" }}>
+    return <div className="modal-wrapper" style={{ display: modalActive ? "flex" : "none" }}>
         <div className="modal">
-            <button className="close__btn" onClick={() => setActive(false)}>Закрыть окно</button>
+            <button className="close__btn" onClick={() => setModalActive(false)}>Закрыть окно</button>
             <h3>Авторизация</h3>
             <form onSubmit={sendForm}>
                 {!auth && <label>
