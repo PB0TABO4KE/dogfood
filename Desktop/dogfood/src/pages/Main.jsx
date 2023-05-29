@@ -33,7 +33,7 @@ const Main = () => {
 
         {user && <>
             <h1>Главная</h1>
-            <div className="container">
+            <div className="container_old">
 
             <PromoFlex type="lg" header="Подарок за первый заказ!" text="Лёгкое говяжье — пластины" pic={banner_pic_1} />
             {goods.filter((el, i) => i >= 8 && i < 12).map(el => <Card {...el} key={el._id} img={el.pictures} setServerGoods={setServerGoods} />)}
@@ -55,10 +55,10 @@ const Main = () => {
                         </>}
             {!user && <> 
                 <h1>Требуется авторизация</h1>
-                <div className="container">
+                <div className="container_old">
             <span className="profile__greetings">Функционал сайта ограничем. Чтобы получить доступ к полному функционалу сайта, войдите в аккаунт или зарегистрируйтесь!</span>
-            
-            <Link to="" title="Войти" className="profile__log" onClick={logIn}><img src={login_ico} className="profile__log" alt="Войти" />Войти</Link>            
+                        <Link to="" title="Войти" className="profile__log" onClick={logIn}><img src={login_ico} className="profile__log" alt="Войти" />Войти</Link>    
+                                
             <PromoFlex type="lg" header="Подарок за первый заказ!" text="Лёгкое говяжье — пластины" pic={banner_pic_1} />
            
              <PromoFlex header="Наборы для дрессировки" text="от 840 ₽" pic={banner_pic_6} />

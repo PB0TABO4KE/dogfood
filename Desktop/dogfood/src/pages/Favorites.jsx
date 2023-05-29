@@ -8,7 +8,7 @@ const Favorites = () => {
     const { goods } = useContext(Ctx);
     const { userId } = useContext(Ctx);
        
-return <div className="container">
+return <div className="container_old">
     {goods.filter(el => el.likes.includes(userId)).map( g => <Card {...g} key={g._id}
     setServerGoods={setServerGoods}
     img={g.pictures}

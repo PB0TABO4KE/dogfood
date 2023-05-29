@@ -32,7 +32,7 @@ const Draft = () => {
     const [goods, setGoods] = useState(cardsData);
     return (
 
-        <div className="container">
+        <div className="container_old">
             {/*<Card img={cardsData[0].pictures}
                 name={cardsData[0].name}
                 price={cardsData[0].price}

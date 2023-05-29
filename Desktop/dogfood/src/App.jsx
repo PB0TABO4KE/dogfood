@@ -5,6 +5,7 @@ import { Routes, Route } from "react-router-dom";
 // Компоненты
 import { Header, Footer, MobileMenu } from "./components/General";
 import Modal from "./components/Modal";
+
 import Ctx from "./context";
 
 //Страницы
@@ -14,6 +15,7 @@ import Catalog from "./pages/Catalog";
 import Profile from "./pages/Profile";
 import Product from "./pages/Product";
 import Favorites from "./pages/Favorites"
+// import Add from "./pages/AddProduct";//
 
 
 const App = () => {
@@ -22,16 +24,25 @@ const App = () => {
     const [token, setToken] = useState(localStorage.getItem("rockToken"));
     const [user, setUser] = useState(localStorage.getItem("rockUser"));
     const [userId, setUserId] = useState(localStorage.getItem("rockId"));
+    const [product, setProduct] = useState({});
     const [modalActive, setModalActive] = useState(false);
+
+
+    const [modalReviewActive, setModalReviewActive] = useState(false);
+    const [addProductFormActive, setAddProductFormActive] = useState(false);
+    const [editProductFormActive, setEditProductFormActive] = useState(false);
+
+    
     const [serverGoods, setServerGoods] = useState([]);
     const [goods, setGoods] = useState([]);
     const [serverNews, setServerNews] = useState([]);
     const [news, setNews] = useState([]);
     const [text, setText] = useState("");
+    
 
     useEffect(() => {
         if (token) {
-            fetch("https://api.react-learning.ru/products?page=1&limit=100", {
+            fetch("https://api.react-learning.ru/products", {
                 headers: {
                     "Authorization": `Bearer ${token}`
                 }
@@ -72,7 +83,6 @@ const App = () => {
         fetch("https://newsapi.org/v2/everything?q=животные&sources=lenta&apiKey=6c7fc5e6a754429ab47063a1b1a54774")
             .then(res => res.json())
             .then(data => {
-                console.log(data);
                 setNewsBlock(data.articles)
             })
     }, [])
@@ -104,8 +114,15 @@ const App = () => {
             userId,
             newsBlock,
             text,
-            setText
-            
+            setText,
+            modalReviewActive,
+            setModalReviewActive,
+            product,
+            setProduct,
+            addProductFormActive,
+            setAddProductFormActive,
+            editProductFormActive,
+            setEditProductFormActive
            }}>
         <React.Fragment>
             <Header />
@@ -120,6 +137,7 @@ const App = () => {
 
                     {user && <>
                         <Route path="/" element={<Main />} />
+                        {/*<Route path="/add" element={<Add />}/>*/}
 
                         <Route path="/catalog" element={<Catalog />} />
 

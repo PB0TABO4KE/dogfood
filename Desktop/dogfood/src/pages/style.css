@@ -1,3 +1,30 @@
+
+
+.profile__log{
+    grid-column: 1 / span 2; 
+    color: black;
+    grid-row: 3;
+    height: 25px;
+    display: flex;
+    flex-direction: column;
+    align-items:flex-start;
+    justify-content: center;
+    
+}
+
+.profile__logout{
+    grid-column: 1; 
+    color: black;
+    grid-row: 3;
+    height: 25px;
+    display: flex;
+    flex-direction: column;
+    align-items:flex-start;
+    justify-content: center;
+    
+}
+
+
 /*Мобильная версия*/
 @media (max-width: 980px) {
 
@@ -20,24 +47,32 @@
     }
 
     .product__picture {
-
+        position: relative;
         grid-row-start: 3;
         grid-row-end: 4;
         grid-column: 1 / span 2;
         max-height: 100%;
         max-width: 100%;
-
+        justify-self: center;
         align-self: center;
     }
 
-
+    .product__img {
+        max-width: 100%;
+        height: auto;
+        max-height: 500px;
+    }
 
     .product__old__price {
         color: grey;
+        font-size: 1rem;
+        text-decoration: line-through;
     }
 
     .product__new__price {
         color: crimson;
+        font-size: 2rem;
+        font-weight: bold;
     }
 
     .product__add__cart {
@@ -87,16 +122,43 @@
         width: 60%;
         height: 45px;
         border-radius: 30px;
+        font-weight: bold;
+        font-size: 1.3rem;
     }
 
     .product__cart__btn:hover {
         background-color: #777;
     }
 
+    .product__add__review__btn {
+        margin-top: 10px;
+        margin-bottom: 10px;
+        border: solid black;
+        outline: none;
+        color: black;
+        border-radius: 4px;
+        cursor: pointer;
+        width: 60%;
+        height: 45px;
+        border-radius: 30px;
+        font-weight: bold;
+        font-size: 1.3rem;
+    }
+    .product__add__review__btn:hover {
+        background-color: #FFE44D;
+    }
+
 
     .product__add__favorites {
-        grid-column: 1 / 2;
-        color: rgb(99, 99, 99);
+        grid-column: 2;
+    color: rgb(99, 99, 99);
+    cursor: pointer;
+    grid-row: 4;
+    align-self: center;
+    }
+
+    .product__add__favorites:hover {
+        color: rgb(104, 0, 0);
     }
 
     .product__delivery {
@@ -150,6 +212,16 @@
     .product__review {
         grid-row: 12;
         grid-column: 1 / span 2;
+
+
+
+    }
+
+    .product__review__cnt {
+        color: #FEAA0D;
+    }
+    .product__review__grey {
+        color: #7a7a7a;
     }
 }
 
@@ -192,13 +264,18 @@
     }
 
     .product__picture {
-
+        position: relative;
         grid-row-start: 3;
         grid-row-end: 10;
         grid-column: 1 / span 2;
         max-width: 100%;
         height: auto;
-        align-self: center;
+    }
+
+    .product__img {
+        max-width: 100%;
+        height: auto;
+        max-height: 500px;
     }
 
     .product__price {
@@ -207,10 +284,14 @@
 
     .product__old__price {
         color: grey;
+        font-size: 1rem;
+        text-decoration: line-through;
     }
 
     .product__new__price {
         color: crimson;
+        font-size: 2rem;
+        font-weight: bold;
     }
 
     .product__add__cart {
@@ -230,7 +311,7 @@
         width: 90px;
         font-size: 25px;
         padding-left: 10%;
-        padding-right: 10%;
+        padding-right: 5%;
     }
 
     .product__cart__cnt input::placeholder {
@@ -259,16 +340,43 @@
         width: 60%;
         height: 45px;
         border-radius: 30px;
+        font-weight: bold;
+        font-size: 1.3rem;
     }
+
 
     .product__cart__btn:hover {
         background-color: #777;
     }
 
+    .product__add__review__btn {
+        margin-top: 10px;
+        margin-bottom: 10px;
+        border: solid black;
+        outline: none;
+        color: black;
+        border-radius: 4px;
+        cursor: pointer;
+        width: 30%;
+        height: 45px;
+        border-radius: 30px;
+        font-weight: bold;
+        font-size: 1.3rem;
+    }
+    .product__add__review__btn:hover {
+        background-color: #FFE44D;
+    }
+   
+
 
     .product__add__favorites {
         grid-row-start: 5;
         color: rgb(99, 99, 99);
+        cursor: pointer;
+    }
+
+    .product__add__favorites:hover {
+        color: rgb(104, 0, 0);
     }
 
     .product__delivery {
@@ -316,6 +424,8 @@
     }
 
 
+
+
     .product__char {
 
         grid-row-start: 11;
@@ -326,5 +436,12 @@
 
         grid-row-start: 12;
         grid-column: 1 / span 4;
+
+    }
+    .product__review__cnt {
+        color: #FEAA0D;
+    }
+    .product__review__grey {
+        color: #7a7a7a;
     }
 }

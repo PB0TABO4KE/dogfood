@@ -33,7 +33,7 @@ const Catalog = () => {
             })
         }
     }
-    return (<div className="container">
+    return (<div className="container_old">
         <div className="pagination__catalog"><Pagination hk={paginate} /></div>
         <div className="filter__catalog">
 

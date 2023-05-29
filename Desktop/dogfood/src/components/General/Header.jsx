@@ -24,6 +24,7 @@ const Header = () => {
     const [likeCnt, setLikeCnt] = useState(0);
     const [cartCnt, setCartCnt] = useState(0);
     useEffect(() => {setLikeCnt(serverGoods.filter(el => el.likes.includes(localStorage.getItem("rockId"))).length)}, [serverGoods]);
+    
     const logIn = (e) => {
         e.preventDefault();
         
