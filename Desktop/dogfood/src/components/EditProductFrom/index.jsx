@@ -5,13 +5,13 @@ import Ctx from "../../context"
 import { useNavigate } from "react-router";
 import Product from "../../pages/Product";
 
-const EditProductForm = () => {
+const EditProductForm = (product) => {
 
 
     const { setEditProductFormActive } = useContext(Ctx);
     const { editProductFormActive } = useContext(Ctx);
     const { token } = useContext(Ctx);
-    const { product } = useContext(Ctx);
+    //const { product } = useContext(Ctx);//
     const { setProduct } = useContext(Ctx);
 
 
@@ -19,7 +19,7 @@ const EditProductForm = () => {
     const navigate = useNavigate();
 
 
-    useEffect(() => {
+    /*useEffect(() => {
         setEditProductName(product?.name);
         setEditProductPrice(product?.price)
         setEditProductDiscount(product?.discount)
@@ -30,7 +30,7 @@ const EditProductForm = () => {
         setEditProductPictures(product?.pictures);
         setEditProductTags(product?.tags);
         setEditProductIsPublished(product?.isPublished);
-    }, [product])
+    }, [product])*/
 
 
     const [editProductName, setEditProductName] = useState(product?.name);
@@ -155,7 +155,7 @@ const EditProductForm = () => {
 
 
                 <button type="submit" onClick={editProductModal}>Отправить</button>
-            </form>
+                </form>
         </div>
     </div>
 

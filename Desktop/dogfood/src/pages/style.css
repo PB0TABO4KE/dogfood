@@ -1,27 +1,25 @@
-
-
-.profile__log{
-    grid-column: 1 / span 2; 
+.profile__log {
+    grid-column: 1 / span 2;
     color: black;
     grid-row: 3;
     height: 25px;
     display: flex;
     flex-direction: column;
-    align-items:flex-start;
+    align-items: flex-start;
     justify-content: center;
-    
+
 }
 
-.profile__logout{
-    grid-column: 1; 
+.profile__logout {
+    grid-column: 1;
     color: black;
     grid-row: 3;
     height: 25px;
     display: flex;
     flex-direction: column;
-    align-items:flex-start;
+    align-items: flex-start;
     justify-content: center;
-    
+
 }
 
 
@@ -126,6 +124,11 @@
         font-size: 1.3rem;
     }
 
+    .product__cart__btn:disabled {
+        opacity: .6;
+        cursor: default;
+    }
+
     .product__cart__btn:hover {
         background-color: #777;
     }
@@ -144,6 +147,7 @@
         font-weight: bold;
         font-size: 1.3rem;
     }
+
     .product__add__review__btn:hover {
         background-color: #FFE44D;
     }
@@ -151,10 +155,10 @@
 
     .product__add__favorites {
         grid-column: 2;
-    color: rgb(99, 99, 99);
-    cursor: pointer;
-    grid-row: 4;
-    align-self: center;
+        color: rgb(99, 99, 99);
+        cursor: pointer;
+        grid-row: 4;
+        align-self: center;
     }
 
     .product__add__favorites:hover {
@@ -220,9 +224,105 @@
     .product__review__cnt {
         color: #FEAA0D;
     }
+
     .product__review__grey {
         color: #7a7a7a;
     }
+
+    .basket__inside {
+        display: none;
+    }
+
+    .basket__inside__mobile {
+        grid-column: 1 / span 2;
+
+    }
+
+
+    .single__product__inside__mobile {
+        display: flex;
+        justify-content: space-between;
+        gap: 3%;
+        background-color: #f7f5f5;
+        padding: 10px;
+        border-radius: 10px;
+
+    }
+
+
+
+    .single__product__inside__mobile__img {
+        max-width: 75px;
+    }
+
+    .single__product__inside__trash {
+
+        width: 40px;
+        height: 40px;
+        color: grey;
+    }
+
+    .single__product__inside__mobile__price {
+        font-size: 1.8rem;
+        font-weight: bold;
+    }
+
+    .single__product__inside__mobile__price__befor__disc {
+        font-size: 0.8rem;
+        text-decoration: line-through;
+        color: grey;
+    }
+
+    .single__product__inside__mobile__price__info {
+        flex-grow: 1;
+    }
+
+    .basket__inside__total {
+        background-color: white;
+        box-shadow: 5px 5px 5px lightgray;
+        border-radius: 10px;
+        grid-column: 1 / span 2;
+        padding: 15px;
+    }
+
+    .basket__inside__total__price__cnt {
+        display: flex;
+    }
+
+    .basket__inside__total__line {
+        display: flex;
+        justify-content: space-between;
+        padding-top: 10px;
+        padding-bottom: 10px;
+    }
+
+    .single__product__inside__mobile__cnt {
+        background-color: white;
+        border: solid 1px;
+        min-width: 55px;
+        max-width: 90px;
+        padding: 5px;
+        display: flex;
+        justify-content: space-between;
+        border-radius: 15px;
+        align-items: center;
+
+
+    }
+
+    .single__product__inside__mobile__btn {
+        background-color: white;
+        border: none;
+        font-size: 1.5rem;
+    }
+
+    .single__product__inside__mobile__name {
+        font-size: 1.5rem;
+    }
+
+
+
+
 }
 
 
@@ -344,6 +444,11 @@
         font-size: 1.3rem;
     }
 
+    .product__cart__btn:disabled {
+        opacity: .6;
+        cursor: default;
+    }
+
 
     .product__cart__btn:hover {
         background-color: #777;
@@ -363,10 +468,11 @@
         font-weight: bold;
         font-size: 1.3rem;
     }
+
     .product__add__review__btn:hover {
         background-color: #FFE44D;
     }
-   
+
 
 
     .product__add__favorites {
@@ -438,10 +544,20 @@
         grid-column: 1 / span 4;
 
     }
+
     .product__review__cnt {
         color: #FEAA0D;
     }
+
     .product__review__grey {
         color: #7a7a7a;
+    }
+
+    .basket__inside {
+        grid-column: 1 / span 4;
+    }
+
+    .basket__inside__mobile {
+        display: none;
     }
 }

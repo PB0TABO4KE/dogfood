@@ -7,6 +7,7 @@ import { Header, Footer, MobileMenu } from "./components/General";
 import Modal from "./components/Modal";
 
 import Ctx from "./context";
+import Api from "./api"
 
 //Страницы
 import Draft from "./pages/Draft";
@@ -15,6 +16,7 @@ import Catalog from "./pages/Catalog";
 import Profile from "./pages/Profile";
 import Product from "./pages/Product";
 import Favorites from "./pages/Favorites"
+import Basket from "./pages/Basket";
 // import Add from "./pages/AddProduct";//
 
 
@@ -32,27 +34,45 @@ const App = () => {
     const [addProductFormActive, setAddProductFormActive] = useState(false);
     const [editProductFormActive, setEditProductFormActive] = useState(false);
 
-    
+
     const [serverGoods, setServerGoods] = useState([]);
     const [goods, setGoods] = useState([]);
     const [serverNews, setServerNews] = useState([]);
     const [news, setNews] = useState([]);
     const [text, setText] = useState("");
-    
+    const [api, setApi] = useState(new Api(token));
+
+    let bStore = localStorage.getItem("rockBasket");
+    //проверка на то, является ли значение строки массивом//
+    if (bStore && bStore[0] === "[" && bStore[bStore.length - 1] === "]") {
+        bStore = JSON.parse(bStore);
+    }
+    else {
+        bStore = [];
+    }
+
+
+    const [basket, setBasket] = useState(bStore);
 
     useEffect(() => {
-        if (token) {
-            fetch("https://api.react-learning.ru/products", {
-                headers: {
-                    "Authorization": `Bearer ${token}`
-                }
-            })
-                .then(res => res.json())
+        localStorage.setItem("rockBasket", JSON.stringify(basket));
+    }, [basket])
+
+
+
+    useEffect(() => {
+        setApi(new Api(token))
+    }, [token])
+
+
+    useEffect(() => {
+        if (api.token) {
+            api.getProduct()
                 .then(data => {
                     setServerGoods(data.products.sort((a, b) => new Date(b.created_at).getTime() - new Date(a.created_at).getTime()));
                 })
         }
-    }, [token])
+    }, [api.token])
 
 
     useEffect(() => {
@@ -61,7 +81,7 @@ const App = () => {
                 .then(res => res.json())
                 .then(data => {
                     setServerNews(data.articles);
-                    })
+                })
         }
     }, [token]);
 
@@ -122,43 +142,48 @@ const App = () => {
             addProductFormActive,
             setAddProductFormActive,
             editProductFormActive,
-            setEditProductFormActive
-           }}>
-        <React.Fragment>
-            <Header />
-            <MobileMenu />
-            <main>
-                <Routes>
+            setEditProductFormActive,
+            api,
+            basket,
+            setBasket
+        }}>
+            <React.Fragment>
+                <Header />
+                <MobileMenu />
+                <main>
+                    <Routes>
 
-                    {!user && <>
-                        <Route path="/*" element={<Main />} />
+                        {!user && <>
+                            <Route path="/*" element={<Main />} />
 
-                    </>}
+                        </>}
 
-                    {user && <>
-                        <Route path="/" element={<Main />} />
-                        {/*<Route path="/add" element={<Add />}/>*/}
+                        {user && <>
+                            <Route path="/" element={<Main />} />
+                            {/*<Route path="/add" element={<Add />}/>*/}
 
-                        <Route path="/catalog" element={<Catalog />} />
+                            <Route path="/catalog" element={<Catalog />} />
 
-                        <Route path="/draft" element={<Draft />} />
+                            <Route path="/draft" element={<Draft />} />
 
-                        <Route path="/profile" element={<Profile />} />
+                            <Route path="/profile" element={<Profile />} />
 
-                        <Route path="/product/:id" element={<Product />} />
+                            <Route path="/product/:id" element={<Product />} />
 
-                        <Route path="/favorites" element={<Favorites />} />
-                    </>}
+                            <Route path="/basket" element={<Basket />} />
 
-                </Routes>
+                            <Route path="/favorites" element={<Favorites />} />
+                        </>}
+
+                    </Routes>
 
 
 
-            </main>
+                </main>
 
-            <Footer />
-            <Modal />
-        </React.Fragment>
+                <Footer />
+                <Modal />
+            </React.Fragment>
         </Ctx.Provider>)
 }
 

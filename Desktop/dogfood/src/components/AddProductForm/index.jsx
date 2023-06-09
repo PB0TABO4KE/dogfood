@@ -7,11 +7,14 @@ import { useNavigate } from "react-router";
 const AddProductForm = () => {
 
 
-    const { setAddProductFormActive } = useContext(Ctx);
-    const { addProductFormActive } = useContext(Ctx);
-    const { token } = useContext(Ctx);
-    const { setServerGoods } = useContext(Ctx);
-    const { setGoods } = useContext(Ctx);
+    const {
+        setAddProductFormActive,
+        addProductFormActive,
+        token,
+        setServerGoods,
+        setGoods
+    } = useContext(Ctx);
+
 
 
 
@@ -88,7 +91,10 @@ const AddProductForm = () => {
             })
                 .then(res => res.json())
                 .then(data => {
+                    
+                    setServerGoods(data.products.sort((a, b) => new Date(b.created_at).getTime() - new Date(a.created_at).getTime()));
                     setGoods(data.products.sort((a, b) => new Date(b.created_at).getTime() - new Date(a.created_at).getTime()));
+                
                 })
             navigate(`/product/${data._id}`)
         }

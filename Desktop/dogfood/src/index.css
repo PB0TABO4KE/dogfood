@@ -13,7 +13,43 @@
     color: wheat;
 }
 
+table {
+    width: 100%;
+    background-color: white;
+    color: black;
+    border-radius: 1rem;
+    overflow: hidden;
+}
 
+td {
+    padding: .6rem 1rem;
+    background-color: lightgrey;
+}
+
+td:first-child {
+    text-align: center;
+}
+
+thead td {
+    text-align: center;
+    font-weight: bold;
+}
+
+tbody tr:not(:last-child) td {
+    border-bottom: 5px solid silver;
+    border-top: 5px solid silver;
+}
+
+tfoot td:first-child {
+    text-align: right;
+    text-transform: uppercase;
+    vertical-align: bottom;
+}
+
+tfoot td:last-child {
+    font-size: 2em;
+    font-weight: bold;
+}
 
 
 /*Мобильная версия*/
@@ -34,7 +70,7 @@
         row-gap: 15px;
         grid-template-columns: repeat(2, 1fr);
         grid-column: 1 / span 2;
-      
+        min-height: 80vh;
 
     }
 
@@ -93,7 +129,7 @@
         color: black;
         grid-row: 1;
     }
-    
+
     .profile__log {
         grid-column: 2;
         color: black;
@@ -103,7 +139,7 @@
         flex-direction: column;
         align-items: flex-start;
         justify-content: center;
-    
+
     }
 
 }
@@ -125,7 +161,7 @@
         grid-column: 1 / span 4;
         grid-template-columns: repeat(4, 25%);
         font-family: nunito, sans-serif;
-  
+
     }
 
 
@@ -134,7 +170,7 @@
         color: black;
         grid-row: 1;
     }
-    
+
     .profile__log {
         grid-column: span 2;
         color: black;
@@ -144,7 +180,7 @@
         flex-direction: column;
         align-items: flex-start;
         justify-content: center;
-    
+
     }
 
     h1,
@@ -195,4 +231,6 @@
         gap: 20 px;
         display: flex;
     }
+
+
 }

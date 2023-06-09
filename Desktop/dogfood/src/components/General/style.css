@@ -59,6 +59,11 @@ right: -50%;
         background-color: #777;
     }
 
+    .mobile__add__cart__btn:disabled {
+        opacity: .6;
+        cursor: default;
+    }
+
     
     .mobile__menu {
         position: fixed;

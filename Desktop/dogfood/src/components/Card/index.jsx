@@ -1,31 +1,49 @@
 import "./style.css";
 import { Link } from "react-router-dom";
 import { Heart, HeartFill, Percent } from "react-bootstrap-icons";
-import { useState, useContext } from "react";
+import { useState, useContext, useEffect } from "react";
 import Ctx from "../../context"
 
 
 // {img, name, price} - это эквивалентно props (props.img, props.name, props.price)
 
 const Card = ({ img, name, price, _id, discount, tags, likes }) => {
-    const { setServerGoods } = useContext(Ctx);
+    const {
+        setServerGoods,
+        userId,
+        api,
+        setBasket,
+        basket
+    } = useContext(Ctx);
+
     //Есть ли id пользователя в массив лайков с товарами //
-    const [isLike, setIsLike] = useState(likes?.includes(localStorage.getItem("rockId")));
+    const [isLike, setIsLike] = useState(likes?.includes(userId));
+    const [inBasket, setInBasket] = useState(basket.filter(el => el.id === _id).length > 0)
+
+
+    // Для добавления 1 товара // 
+    const addToCart = (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        setInBasket(true);
+        setBasket(prev => [...prev, {
+            id: _id,
+            cnt: 1,
+            name: name,
+            img: img,
+            price: price,
+            discount: discount
+        }])
+
+    }
 
     const updLike = (e) => {
         e.stopPropagation();
         e.preventDefault();
         setIsLike(!isLike);
 
-        const token = localStorage.getItem("rockToken");
-        fetch(`https://api.react-learning.ru/products/likes/${_id}`, {
-            method: isLike ? "DELETE" : "PUT",
-            headers: {
-                "Authorization": `Bearer ${token}`
-            }
-        })
 
-            .then(res => res.json())
+        api.setLike(_id, !isLike)
             .then(data => {
                 console.log(data);
                 // Изменить основной массив с товарами внутри React (на стороне клиента)//
@@ -53,8 +71,8 @@ const Card = ({ img, name, price, _id, discount, tags, likes }) => {
                 <HeartFill /> : <Heart />}
         </span>
         {/* <img src={img} alt="Картинка" className="card__img" />*/}
-        <span className="card__img__2" style={{backgroundImage: `url(${img})`}}/>
-        
+        <span className="card__img__2" style={{ backgroundImage: `url(${img})` }} />
+
         <span className="card__name">{name}</span>
         <span className="card__price">
             {discount > 0
@@ -66,7 +84,7 @@ const Card = ({ img, name, price, _id, discount, tags, likes }) => {
                 :
                 price
             }&nbsp;руб</span>
-        <button className="card__btn">В корзину</button>
+        <button className="card__btn" onClick={addToCart} disabled={inBasket}>В корзину</button>
         {/* <span className="card__tags">
         {tags.map (el => <span key={el}>{el}</span>)}
         </span>*/}

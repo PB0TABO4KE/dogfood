@@ -16,23 +16,37 @@ import Ctx from "../../context"
 
 
 const Header = () => {
-    const {user} = useContext(Ctx); 
-    const {setModalActive} = useContext(Ctx);
-    const {serverGoods} = useContext(Ctx);
-    
+    const {
+        user,
+        setModalActive,
+        serverGoods,
+        userId,
+        basket
+    } = useContext(Ctx);
+
+
     const navigate = useNavigate();
     const [likeCnt, setLikeCnt] = useState(0);
     const [cartCnt, setCartCnt] = useState(0);
-    useEffect(() => {setLikeCnt(serverGoods.filter(el => el.likes.includes(localStorage.getItem("rockId"))).length)}, [serverGoods]);
-    
+    useEffect(() => { setLikeCnt(serverGoods.filter(el => el.likes.includes(userId)).length) }, [serverGoods]);
+
     const logIn = (e) => {
         e.preventDefault();
-        
-      
+
+
         setModalActive(true);
         navigate("/profile")
     }
 
+    useEffect(() => {
+        let cnt = 0;
+        for (let i = 0; i < basket.length; i++) {
+            cnt += basket[i].cnt
+        }
+        setCartCnt(cnt);
+
+        //setCartCnt(basket.reduce((acc, el)=> acc + el.cnt, 0)) - то же самое, только с методом reduce//
+    }, [basket])
 
     return <header>
         <Logo />
@@ -41,13 +55,13 @@ const Header = () => {
         <nav className="header__menu">
             {user && <>
                 <Link to="/catalog" title="Каталог" className="badge__el"><CardList />
-                <span className="badge__item">{serverGoods.length}</span></Link>
+                    <span className="badge__item">{serverGoods.length}</span></Link>
 
                 <Link to="/favorites" title="Избранное" className="badge__el"><Heart />
-                <span className="badge__item">{likeCnt}</span></Link>
+                    <span className="badge__item">{likeCnt}</span></Link>
 
-                <Link to="/cart" title="Корзина" className="badge__el"><Bag />
-                <span className="badge__item">{cartCnt}</span></Link>
+                <Link to="/basket" title="Корзина" className="badge__el"><Bag />
+                    <span className="badge__item">{cartCnt}</span></Link>
                 <Link to="/profile" title="Профиль"><PersonCircle /></Link>
 
 

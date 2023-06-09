@@ -11,7 +11,7 @@ import Ctx from "../context"
 const Catalog = () => {
     const { goods } = useContext(Ctx);
     const { text } = useContext(Ctx);
-    const paginate = usePagination(goods, 20)
+    const paginate = usePagination(goods, 40)
     const { setServerGoods } = useContext(Ctx);
     const [sort, setSort] = useState(null);
 

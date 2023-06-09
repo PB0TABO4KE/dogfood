@@ -1,5 +1,6 @@
 import { useParams } from "react-router-dom";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
+import { useNavigate } from "react-router";
 import "./style.css";
 import Loader from "../components/Loader";
 import Review from "../components/Review";
@@ -7,23 +8,25 @@ import ReviewModal from "../components/ReviewModal"
 import MobileAddCart from "../components/General/MobileAddCart";
 import EditProductForm from "../components/EditProductFrom";
 import { Percent, HeartFill, TruckFront, Award, StarFill, StarHalf, Star } from "react-bootstrap-icons";
-import { useContext } from "react";
 
-import { useNavigate } from "react-router";
 import Ctx from "../context"
 
 const Product = () => {
-    const { token } = useContext(Ctx);
-    const { setServerGoods } = useContext(Ctx);
-    const { setGoods } = useContext(Ctx);
-    const { serverGoods } = useContext(Ctx);
-    const { setModalReviewActive } = useContext(Ctx);
-    const { setEditProductFormActive } = useContext(Ctx);
-    const { product } = useContext(Ctx);
-    const { setProduct } = useContext(Ctx);
-    const { userId } = useContext(Ctx);
+    const {
+        userId,
+        token,
+        setServerGoods,
+        setGoods,
+        setModalReviewActive,
+        setEditProductFormActive,
+        product,
+        setProduct,
+        setBasket,
+        basket
+    } = useContext(Ctx);
+
     const navigate = useNavigate();
-    
+
 
     const makeReview = (e) => {
         e.preventDefault();
@@ -31,12 +34,44 @@ const Product = () => {
         setModalReviewActive(true);
     }
 
+    const [productsCnt, setProductsCnt] = useState(1);
     const [reviewCnt, setReviewCnt] = useState(0);
-
     const [isLike, setIsLike] = useState(product?.likes?.includes(localStorage.getItem("rockId")));
     const [reviewRating, setRatingStat] = useState(0);
+    const [inBasket, setInBasket] = useState(false);
+
+
+    const [delProductButton, setDelProductButton] = useState(basket.includes(e => e.id === product._id));
 
     const { id } = useParams()
+
+
+    useEffect(() => {
+        setInBasket(basket.filter(el => el.id === product?._id).length > 0)
+    }, [product])
+
+    const addToCart = (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        setInBasket(true);
+        setBasket(prev => [...prev, {
+            id: product._id,
+            cnt: productsCnt,
+            name: product.name,
+            img: product.pictures,
+            price: product.price,
+            discount: product.discount
+        }])
+
+    }
+
+    const delFromCart = (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        setBasket(basket.filter(el => el.id !== product?._id));
+        setInBasket(false);
+
+    }
 
 
     useEffect(() => {
@@ -121,14 +156,14 @@ const Product = () => {
         let data = await res.json();
 
         fetch("https://api.react-learning.ru/products", {
-                headers: {
-                    "Authorization": `Bearer ${token}`
-                }
+            headers: {
+                "Authorization": `Bearer ${token}`
+            }
+        })
+            .then(res => res.json())
+            .then(data => {
+                setGoods(data.products.sort((a, b) => new Date(b.created_at).getTime() - new Date(a.created_at).getTime()));
             })
-                .then(res => res.json())
-                .then(data => {
-                    setGoods(data.products.sort((a, b) => new Date(b.created_at).getTime() - new Date(a.created_at).getTime()));
-                })
 
         alert("Товар удалён. Вы будете переадресованы на страницу каталога");
         navigate("/catalog");
@@ -142,6 +177,8 @@ const Product = () => {
         window.scrollTo(0, 0);
         setEditProductFormActive(true);
     }
+
+
 
 
 
@@ -251,9 +288,10 @@ const Product = () => {
 
                 <div className="product__add__cart">
 
-                    <input type="number" min="0" className="product__cart__cnt" placeholder="1" />
+                    <input type="number" min="0" className="product__cart__cnt" placeholder="1" onChange={(e) => setProductsCnt(e.target.value)} />
 
-                    <button className="product__cart__btn">В корзину</button>
+                    <button className="product__cart__btn" onClick={addToCart} disabled={inBasket}>В корзину</button>
+                    <button className="product__cart__btn" onClick={delFromCart} style={{ display: inBasket ? "inline" : "none" }}>Удалить из корзины</button>
                 </div>
 
 
@@ -308,7 +346,7 @@ const Product = () => {
 
         </section>
         <ReviewModal />
-        <EditProductForm/>
+        {product.name && <EditProductForm {...product}/>}
     </>
 }
 

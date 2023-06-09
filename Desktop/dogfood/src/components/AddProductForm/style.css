@@ -18,8 +18,8 @@
 
     .modal {
         position: relative;
-        max-width: calc(100% - 40 px);
-        max-height: calc(100% - 40 px);
+        max-width: calc(100%-40 px);
+        max-height: calc(100%-40 px);
         width: 85%;
         background-color: #FFE24D;
         color: #000;
@@ -88,8 +88,8 @@
     }
 
     .modal {
-        max-width: calc(100% - 60 px);
-        max-height: calc(100% - 60 px);
+        max-width: calc(100%-60px);
+        max-height: calc(100%-60px);
         width: 400px;
         background-color: #FFE24D;
         color: #000;

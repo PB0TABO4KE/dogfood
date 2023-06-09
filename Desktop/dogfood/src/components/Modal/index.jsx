@@ -1,6 +1,6 @@
 import { useState } from "react";
 import "./style.css";
-import { useContext} from "react";
+import { useContext } from "react";
 import Ctx from "../../context"
 
 
@@ -8,8 +8,9 @@ import Ctx from "../../context"
 const Modal = () => {
 
     const { setModalActive } = useContext(Ctx);
-    const { modalActive } = useContext(Ctx); 
-    const { setUser } = useContext(Ctx); 
+    const { modalActive } = useContext(Ctx);
+    const { setUser } = useContext(Ctx);
+    const { api } = useContext(Ctx);
 
     const [auth, setAuth] = useState(true);
 
@@ -17,6 +18,7 @@ const Modal = () => {
     const [email, setEmail] = useState("");
     const [pwd, setPwd] = useState("");
     const [testPwd, setTestPwd] = useState("");
+
 
     const testAccess = {
         color: pwd === testPwd ? "forestgreen" : "crimson"
@@ -46,31 +48,13 @@ const Modal = () => {
             body.name = name;
             body.group = "group-12";
         }
-        let log = "https://api.react-learning.ru/signin"; // вход
-        let reg = "https://api.react-learning.ru/signup"; // регистрация
-
-        // Регистрация !== вход (после добавления пользователя в БД, нужно будет повторно войти в аккаунт)
-        let res = await fetch(auth ? log : reg, {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify(body)
-        })
-        let data = await res.json()
+        let data = await (auth ? api.auth(body) : api.reg(body))
         if (!data.err) {
- 
+
             if (!auth) {
                 delete body.name;
-                delete body.group
-                let resLog = await fetch(log, {
-                    method: "POST",
-                    headers: {
-                        "Content-Type": "application/json"
-                    },
-                    body: JSON.stringify(body)
-                })
-                let dataLog = await resLog.json()
+                delete body.group;
+                let dataLog = await api.auth(body)
                 if (!dataLog.err) {
                     localStorage.setItem("rockUser", dataLog.data.name);
                     localStorage.setItem("rockToken", dataLog.token);
